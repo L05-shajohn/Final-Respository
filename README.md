@@ -16,6 +16,14 @@ awk '{if ($6<0.0000000000000000000000001)print $1 }' synaptotagmin.blastp.detail
 
 #This sets an evalue of 1e-25 which gets rid of some hits ultimately yielding an ideal number of 33 proteins which falls with the 15-50 protein range that was alloted for this analysis. 
 
+wc -l synaptotagmin.blastp.detail.filtered.out
+
+#This counts the number of results. 
+
+seqkit grep --pattern-file synaptotagmin.blastp.detail.filtered.out allprotein.fas > synaptotagmin.blastp.detail.filtered.fas
+
+#This searches sequences by ID, name, sequence, and sequence motifs.
+
 muscle -in synaptotagmin.blastp.detail.filtered.fas -out synaptotagmin.blastp.detail.filtered.aligned.fas
 
 #This creates multiple simulatneous alignments using the query sequence and the sequences in the database. 
