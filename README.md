@@ -43,3 +43,31 @@ nw_display -s synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefil
 git add synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile.svg git commit -m "created a svg from a newick file" git pull --no-edit git push
 
 #This pushes the svg file into the respository where it can be viewed as a png file. 
+
+java -jar ~/tools/Notung-3.0-beta/Notung-3.0-beta.jar -s speciesTreeBilateriaCnidaria.tre -g synaptotagmin.genes.tre --reconcile --speciestag prefix --savepng --events
+
+#This creates a reconciled tree using the gene tree and the species tree. 
+
+python2.7 ~/tools/recPhyloXML/python/NOTUNGtoRecPhyloXML.py -g synaptotagmin.genes.tre.reconciled --include.species
+
+#This creates a RecPhyloXML object to view the gene-within-species tree.
+
+thirdkind -f synaptotagmin.genes.tre.reconciled.xml -o synaptotagmin.genes.tre.genes.tre.reconciled.svg
+
+#This creates a gene-reconciliation-within-species tree.
+
+git add synaptotagmin.genes.tre.genes.tre.reconciled.svg git commit -m "created a reconciled gene tree for synaptotagmin imposed on a species tree png " git pull --no-edit git push
+
+#This pushes the reconciled tree svg fle to the respository to be viewed later on.
+
+java -jar ~/tools/Notung-3.0-beta/Notung-3.0-beta.jar -s speciesTreeBilateriaCnidaria.tre -g synaptotagmin.genes.tre --root --speciestag prefix --savepng --events
+
+#This creates a rerooted gene tree that minimizes gene duplications and losses. 
+
+iqtree -s synaptotagmin.blastp.detail.filtered.aligned.fas -bb 1000 -nt 2 -m VT+F+R5 -t synaptotagmin.genes.tre -pre synaptotagmin.genes.ufboot
+
+#This re-ran the iqtree search but with bootstrap support. 
+
+gotree reroot midpoint -i synaptotagmin.genes.ufboot -o synaptotagmin.genes.midpoint.ufboot
+
+#This reroooted the tree at the midpoint. 
