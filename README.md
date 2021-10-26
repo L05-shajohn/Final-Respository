@@ -1,5 +1,5 @@
 # Method-Section
-Methods Code
+
 ncbi-acc-download -F fasta -m protein XP_001620799.2
 
 #This downloads the protein sequence. 
