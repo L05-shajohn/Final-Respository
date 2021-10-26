@@ -23,3 +23,23 @@ muscle -in synaptotagmin.blastp.detail.filtered.fas -out synaptotagmin.blastp.de
 t_coffee -other_pg seq_reformat -in synaptotagmin.blastp.detail.filtered.aligned.fas -output sim
 
 #This provides statistics about the multiple sequence alignment such as average percent identity among all sequences as well as the average percent identity between the query sequence and all other sequences. 
+
+sed "s/ //g" synaptotagmin.blastp.detail.filtered.aligned.fas > synaptotagmin.blastp.detail.filtered.aligned.fas
+
+#This replaces spaces in the annotations with underscores so they are not lost when making the phylogenetic tree. 
+
+iqtree -s synaptotagmin.blastp.detail.filtered.aligned_.fas -nt 2
+
+#This generates the most optimal tree; it is unrooted. 
+
+gotree reroot midpoint -i synaptotagmin.blastp.detail.filtered.aligned_.fas.treefile -o synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile
+
+#This roots the tree at its midpoint. 
+
+nw_display -s synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile -w 1000 -b 'opacity:0' > synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile.svg
+
+#This converts the tree to an svg file.
+
+git add synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile.svg git commit -m "created a svg from a newick file" git pull --no-edit git push
+
+#This pushes the svg file into the respository where it can be viewed as a png file. 
