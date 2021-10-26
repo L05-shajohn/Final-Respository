@@ -30,7 +30,7 @@ sed "s/ //g" synaptotagmin.blastp.detail.filtered.aligned.fas > synaptotagmin.bl
 
 iqtree -s synaptotagmin.blastp.detail.filtered.aligned_.fas -nt 2
 
-#This generates the most optimal tree; it is unrooted. 
+#This generates the most optimal gene tree; it is unrooted. 
 
 gotree reroot midpoint -i synaptotagmin.blastp.detail.filtered.aligned_.fas.treefile -o synaptotagmin.blastp.detail.filtered.aligned_.fas.midpoint.treefile
 
