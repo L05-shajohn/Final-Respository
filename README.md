@@ -79,3 +79,24 @@ iqtree -s synaptotagmin.blastp.detail.filtered.aligned.fas -bb 1000 -nt 2 -m VT+
 gotree reroot midpoint -i synaptotagmin.genes.ufboot -o synaptotagmin.genes.midpoint.ufboot
 
 #This reroooted the tree at the midpoint. 
+
+sed 's_/ /_/g' synaptotagmin.blastp.detail.filtered.fas > synaptotagmin.blastp.detail.filtered.renamed.fas_
+
+#This changes the spaces in the fasta file to underscores so the sequence match the names in the final phylogenetic tree.
+
+    iprscan5   —sharon.john.email@stonybrook.edu  --multifasta --useSeqId --sequence   synaptotagmin.blastp.detail.filtered.fas
+   
+#This runs iprscan5 which searches for protein domains. 
+
+cat ~/labs/lab8-L05-shajohn/synaptotagmin/*.tsv.tsv > ~/labs/lab8-L05-shajohn/synaptotagmin.domains.all.tsv
+
+#This concatenates the the protein domains into one file. 
+
+grep Pfam ~/labs/lab8-L05-shajohn/synaptotagmin.domains.all.tsv >  ~/labs/lab8-L05-shajohn/synaptotagmin.domains.pfam.tsv
+
+#This filters for the domains identified by Pfam only.
+
+awk 'BEGIN{FS="\t"} {print $1"\t"$3"\t"$7"@"$8"@"$5}' ~/labs/lab8-L05-shajohn/synaptotagmin.domains.pfam.tsv | datamash -sW --group=1,2 collapse 3 | sed 's/,/\t/g' | sed 's/@/,/g' > ~/labs/lab8-L05-shajohn/synaptotagmin.domains.pfam.evol.tsv
+
+#This fixes up the output by re-arranging the interproscan output. 
+
