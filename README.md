@@ -1,5 +1,7 @@
 # Final Respository
 
+This project was intended to discover more about the synaptotagmin protein familiy in the proteomes of select species of cnidaria and bileteria. The specific species included . The synaptotagmin-like-4 protein, XP_001620799.2, was compared against the proteomes of those species to determine how many proteins were part of the synaptotagmin family. Once the number of homologs was returned, a e-value of 1e-25 was applied to narrow the number to only the putative homologs. This returned 33 homologs which were then aligned against one another. This was then used to create a midpoint-rooted gene tree which was reconciled on top of a species tree. The number of duplications and losses within each species was also calculated. Lasly, the relevant protein domains that were conserved between the species were mapped out. 
+
 ncbi-acc-download -F fasta -m protein XP_001620799.2
 
 #This downloads the protein sequence. 
