@@ -1,4 +1,4 @@
-# Method-Section
+# Final Respository
 
 ncbi-acc-download -F fasta -m protein XP_001620799.2
 
